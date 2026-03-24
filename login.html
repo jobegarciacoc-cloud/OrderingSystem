@@ -12,22 +12,34 @@
 </head>
 <body>
 <h1>Admin Login</h1>
-<input type="text" id="username" placeholder="Username"><br>
+<input type="email" id="email" placeholder="Email"><br>
 <input type="password" id="password" placeholder="Password"><br>
 <button onclick="login()">Login</button>
 
-<script>
-  function login() {
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("password").value;
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    // Simplified: hardcoded admin credentials
-    if(user === "admin" && pass === "1234") {
-      window.location.href = "admin_dashboard.html";
-    } else {
-      alert("❌ Invalid credentials!");
-    }
-  }
+const firebaseConfig = {
+  apiKey: "AIzaSyAJcSbCt9SCmOoq_OgiGSyvpxTKMiMOCm4",
+  authDomain: "restaurantorderingsystem-782f7.firebaseapp.com",
+  projectId: "restaurantorderingsystem-782f7",
+  storageBucket: "restaurantorderingsystem-782f7.firebasestorage.app",
+  messagingSenderId: "735632098137",
+  appId: "1:735632098137:web:d5e8c888400fe3f33bc248"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.login = function() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => { window.location.href = "admin_dashboard.html"; })
+    .catch(err => { alert("❌ " + err.message); });
+}
 </script>
 </body>
 </html>
