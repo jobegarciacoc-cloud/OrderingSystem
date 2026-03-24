@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ano kaya name ng system natin</title>
-  </title>
+  <title>SmartOrder Pro</title>
   <style>
     body {
       font-family: Arial;
@@ -46,28 +45,28 @@
 </head>
 <body>
 
-<h1>ano kaya name ng system natin</h1>
+<h1>🍽️ SmartOrder Pro</h1>
 <h3>Table 1</h3>
 
 <div class="menu">
   <div class="item">
-    <img src="Burger.jpg">
+    <img src="Burger.jpg" alt="Burger">
     <h3>Burger</h3>
     <button onclick="addToCart('Burger')">Add</button>
   </div>
   <div class="item">
-    <img src="Fries.jpg">
+    <img src="Fries.jpg" alt="Fries">
     <h3>Fries</h3>
     <button onclick="addToCart('Fries')">Add</button>
   </div>
   <div class="item">
-    <img src="Coke.jpg">
+    <img src="Coke.jpg" alt="Coke">
     <h3>Coke</h3>
     <button onclick="addToCart('Coke')">Add</button>
   </div>
 </div>
 
-<h2>Cart</h2>
+<h2>🛒 Cart</h2>
 <p id="cart"></p>
 <button onclick="placeOrder()">Place Order</button>
 
@@ -95,7 +94,10 @@
   }
 
   window.placeOrder = async function(){
-    if(cart.length === 0){ alert("Cart is empty!"); return; }
+    if(cart.length === 0){ 
+      alert("Cart is empty!"); 
+      return; 
+    }
     try{
       await addDoc(collection(db,"orders"),{
         tableNumber: 1,
@@ -106,8 +108,12 @@
       alert("✅ Order Placed!");
       cart = [];
       document.getElementById("cart").innerText = "";
-    }catch(e){ console.error(e); }
+    } catch(e){ 
+      console.error(e); 
+      alert("❌ Something went wrong!");
+    }
   }
 </script>
+
 </body>
 </html>
